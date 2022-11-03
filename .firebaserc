@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "calculadora-75fc5": {
+      "hosting": {
+        "calculator": [
+          "calculadora-75fc5"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "calculadora-75fc5"
+  }
+}
