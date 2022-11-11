@@ -1,6 +1,8 @@
+import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,22 +10,15 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+@Injectable()
 export class LoginComponent {
 
   public usuario: any = {};
-  public mensaje = {
-    title: 'Success',
-    text: `Bienvenido ${this.usuario.email}`,
-    icon: 'success',
-    confirmButtonText: 'Ok'
-  }
 
-  constructor(public auth: AngularFireAuth) {
+    constructor(public auth : AngularFireAuth,private router: Router ) {
     this.auth.authState.subscribe(user => {
       console.log('Estado del usuario: ', user?.multiFactor);
-
-      debugger
-
       if (!user) {
         return;
       } else {
@@ -33,17 +28,20 @@ export class LoginComponent {
         this.usuario.photo = user.photoURL
       }
 
-      if (this.usuario.email.substring(this.usuario.email.indexOf('@')) === "@bbva.com") {
+      if (this.usuario.email.substring(this.usuario.email.indexOf('@')) == "@bbva.com") {
         Swal.fire({
           title: `Exito`,
           text: `Bienvenido ${this.usuario.email}`,
           icon: `success`,
           confirmButtonText: `Ok`
+        }).then( ()=>{
+          console.log("Hola mundo");
+          this.router.navigate(['home']);
         });
       } else {
         Swal.fire({
           title: `Error`,
-          text: `Bienvenido ${this.usuario.email}`,
+          text: `Correo no valido para acceso ${this.usuario.email}`,
           icon: `error`,
           confirmButtonText: `Ok`
         });
