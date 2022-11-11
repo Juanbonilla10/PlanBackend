@@ -11,25 +11,36 @@ import { AngularFireModule } from '@angular/fire/compat';
 
 //Environment
 import { environment } from '../environments/environment';
-import { HomeComponent } from './components/home/home.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+//Material
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { WebComponent } from './components/web/web.component';
+import { FooterComponent } from './components/web/footer/footer.component';
+import { HeaderComponent } from './components/web/header/header.component';
+import { NavbarComponent } from './components/web/navbar/navbar.component';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    DashboardComponent,
+    WebComponent,
     FooterComponent,
-    NavbarComponent,
-    SidebarComponent
+    HeaderComponent,
+    NavbarComponent
   ],
   imports: [
+    MatTooltipModule,
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: PERSISTENCE, useValue: 'session' }

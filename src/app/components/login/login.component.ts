@@ -36,7 +36,8 @@ export class LoginComponent {
           confirmButtonText: `Ok`
         }).then( ()=>{
           console.log("Hola mundo");
-          this.router.navigate(['home']);
+          localStorage.setItem('user', JSON.stringify(user));
+          this.router.navigate(['dashboard']);
         });
       } else {
         Swal.fire({
